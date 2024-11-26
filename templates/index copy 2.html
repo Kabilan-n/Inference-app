@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Model Selector</title>
+</head>
+<body>
+    <h1>Upload File for YOLO Detection</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="model">Select Model:</label>
+        <select name="model" id="model" required>
+            {% for model in models %}
+            <option value="{{ model }}" {% if model == selected_model %}selected{% endif %}>{{ model }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="file" name="file" required>
+        <br><br>
+        <button type="submit">Upload and Detect</button>
+    </form>
+
+    {% if result_path %}
+    <h2>Result:</h2>
+    {% if result_path.endswith('.jpg') %}
+    <img src="{{ result_path }}" alt="Result" style="max-width: 100%; height: auto;">
+    {% elif result_path.endswith('.mp4') %}
+    <video controls>
+        <source src="{{ result_path }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    {% endif %}
+    {% endif %}
+</body>
+</html>
