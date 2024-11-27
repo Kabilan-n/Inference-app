@@ -80,6 +80,8 @@ def process_video(video_path, model_name):
 
     cap.release()
     out.release()
+
+    
     return output_path
 
 
